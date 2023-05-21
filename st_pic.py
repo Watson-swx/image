@@ -1,7 +1,5 @@
 import streamlit as st
 from aip import AipImageProcess
-import cv2
-import numpy as np
 import base64
 
 APP_ID = '22580981'
@@ -13,6 +11,7 @@ client = AipImageProcess(APP_ID, API_KEY, SECRET_KEY)
 def get_file_content(filePath):
     with open(filePath, 'rb') as fp:
         return fp.read()
+
 
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
@@ -30,16 +29,13 @@ col1, col2= st.columns(2)
 
 if uploaded_file is not None:
     # 将传入的文件转为Opencv格式
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-    opencv_image = cv2.imdecode(file_bytes, 1)
+    image = uploaded_file.read()
+    image_base64 = base64.b64encode(image).decode('utf8')
 
     with col1:
         # 展示图片
-        st.image(opencv_image, channels="BGR")
+        st.image(image, channels="BGR")
         # 保存图片
-        cv2.imwrite('test.jpg',opencv_image)
-        image = get_file_content('test.jpg')
-
 
     if add_selectbox == "人像动漫化":
         # 调用人物动漫化
@@ -58,17 +54,22 @@ if uploaded_file is not None:
         options = {}
         options['option'] = add_radio
         image_base64 = client.styleTrans(image,options)['image']
-
+        
     #将图片保存为文件
+    #print(image_base64)
     imgdata = base64.b64decode(image_base64)
     with open("test_cartoon.jpg",'wb') as f:
         f.write(imgdata)
     #print(res_image)
 
-    # 如果按钮点击，则展示
-    if st.button('show result'):
-        with col2:
-            # 展示图片
-            st.image('test_cartoon.jpg', channels="BGR",caption=add_selectbox)
-    else:
-        pass
+if st.button('Run'):
+    # 展示图片
+    with col2:
+        st.image('test_cartoon.jpg', channels="BGR",caption=add_selectbox)
+        # 如果按钮点击，则展示
+        with open("test_cartoon.jpg", "rb") as file:
+            btn = st.download_button(
+                    label="下载图片",
+                    data=file,
+                    file_name="bingbing.png")
+
