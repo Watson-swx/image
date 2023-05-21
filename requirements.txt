@@ -1,7 +1,7 @@
 pandas==1.2.4
 numpy==1.20.1
 plotly==5.2.1
-streamlit==0.86.0
+streamlit==1.22.0
 matplotlib==3.3.4
 baidu-aip==4.16.10
 chardet==4.0.0
