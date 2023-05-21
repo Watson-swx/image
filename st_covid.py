@@ -32,7 +32,7 @@ state_total = get_total_dataframe(state_data)
 if st.sidebar.checkbox("世卫组织冠状病毒 (COVID-19) 仪表板", True, key='2'):
     st.markdown("## **世卫组织冠状病毒 (COVID-19) 仪表板**")
     st.markdown("### %s 总新增病例、累计病例、新增死亡病例和累计死亡病例" % (select))
-    if not st.checkbox('Hide Graph', False, key=1):
+    if not st.checkbox('Hide Graph', False, key='1'):
         state_total_graph = px.bar(
             state_total,
             x='病例分类',
