@@ -5,3 +5,4 @@ streamlit==0.86.0
 matplotlib==3.3.4
 baidu-aip==4.16.10
 chardet==4.0.0
+opencv-python==4.5.4.58
