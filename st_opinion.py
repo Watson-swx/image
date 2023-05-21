@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 #from HK import synthesis
 #from CPOE import evolution
 df = pd.DataFrame(
