@@ -3,3 +3,5 @@ numpy==1.21.2
 plotly==5.2.1
 streamlit==0.86.0
 matplotlib==3.4.3
+bytes
+unicode
